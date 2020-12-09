@@ -5,6 +5,19 @@
 
 using namespace Rcpp;
 
+// MetropolisCpp
+List MetropolisCpp(double sigma, double x0, int N);
+RcppExport SEXP _StatComp_MetropolisCpp(SEXP sigmaSEXP, SEXP x0SEXP, SEXP NSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type sigma(sigmaSEXP);
+    Rcpp::traits::input_parameter< double >::type x0(x0SEXP);
+    Rcpp::traits::input_parameter< int >::type N(NSEXP);
+    rcpp_result_gen = Rcpp::wrap(MetropolisCpp(sigma, x0, N));
+    return rcpp_result_gen;
+END_RCPP
+}
 // gibbsC
 NumericMatrix gibbsC(int N, int thin);
 RcppExport SEXP _StatComp_gibbsC(SEXP NSEXP, SEXP thinSEXP) {
@@ -32,6 +45,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_StatComp_MetropolisCpp", (DL_FUNC) &_StatComp_MetropolisCpp, 3},
     {"_StatComp_gibbsC", (DL_FUNC) &_StatComp_gibbsC, 2},
     {"_StatComp_vaccC", (DL_FUNC) &_StatComp_vaccC, 3},
     {NULL, NULL, 0}
